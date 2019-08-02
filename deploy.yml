@@ -1,0 +1,21 @@
+---
+- hosts: web
+  tasks:
+   - name: set folder permissions
+     file:
+       path: /usr/share/tomcat/webapps/
+       state: directory
+       mode: 0775
+       
+   - name : copy the build artifacts of maven into webserver
+     copy:
+       src: /tmp/venkynew.war
+       dest: /usr/share/tomcat/webapps/
+   - name: restart tomcat server
+     service:
+        name: tomcat
+        state: started
+
+   
+     
+
